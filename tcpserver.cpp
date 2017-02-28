@@ -3,6 +3,9 @@
 int main()
 {
 	int nsfd;
+	char buf[1024] = {0};
+	gethostname(buf, 1023);
+	cout<<"hostname : "<<buf<<endl;
 	if((nsfd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	{
 		cout<<"TCP socket error"<<endl;
@@ -27,6 +30,17 @@ int main()
 		cout<<strerror(errno)<<endl;
 		return 2;
 	}
-	listen(
+	listen(nsfd, 5);
+	while(true)
+	{
+		//cout<<"lolz"<<endl;
+		sockaddr_in cli;
+		socklen_t clil = sizeof(cli);
+		int sfd = accept(nsfd, (sockaddr*) &cli, &clil);
+		int port = ntohs(cli.sin_port);
+		cout<<"connected to port:"<<port<<flush;
+		close(sfd);
+	}
+	close(nsfd);
 	return 0;
 }

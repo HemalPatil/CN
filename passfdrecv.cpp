@@ -1,16 +1,4 @@
-#include<iostream>
-#include<string>
-#include<stdlib.h>
-#include<string.h>
-#include<unistd.h>
-#include<sys/types.h>
-#include<sys/un.h>
-#include<sys/socket.h>
-#include<arpa/inet.h>
-#include<netinet/in.h>
-#include<fcntl.h>
-
-using namespace std;
+#include"header.h"
 
 const string sockpath = "/tmp/myunixsocket";
 cmsghdr *cmsg = NULL;
